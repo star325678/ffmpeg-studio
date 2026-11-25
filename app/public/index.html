@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080a0d">
+  <meta name="description" content="FFmpeg Studio - 本地原生 FFmpeg 可视化工作台，支持转换、剪辑、检查与批量任务。">
+  <title>FFmpeg Studio · 本地视频工作台</title>
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient-orb ambient-orb-a"></span>
+    <span class="ambient-orb ambient-orb-b"></span>
+    <span class="ambient-grid"></span>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <a href="#/dashboard" class="brand-link" aria-label="FFmpeg Studio 首页">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M9 7.5h13.5a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 12.2v7.6l6.2-3.8L12 12.2Z" fill="currentColor"/>
+              <path d="M24.5 4.5 29 9m-1.5-4.5H23M29 9V4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="brand-text">
+            <strong>FFmpeg <span>Studio</span></strong>
+            <small>本地视频工作台</small>
+          </span>
+        </a>
+      </div>
+
+      <nav class="nav" id="main-nav" aria-label="主导航">
+        <p class="nav-label">工作空间</p>
+        <a href="#/dashboard" class="nav-item" data-route="dashboard">
+          <span class="nav-icon" data-icon="grid"></span>
+          <span>工作台</span>
+        </a>
+        <a href="#/convert" class="nav-item" data-route="convert">
+          <span class="nav-icon" data-icon="swap"></span>
+          <span>格式转换</span>
+          <span class="nav-badge" id="nav-convert-badge">0</span>
+        </a>
+        <a href="#/edit" class="nav-item" data-route="edit">
+          <span class="nav-icon" data-icon="scissors"></span>
+          <span>剪辑工坊</span>
+        </a>
+        <a href="#/inspect" class="nav-item" data-route="inspect">
+          <span class="nav-icon" data-icon="scan"></span>
+          <span>媒体信息</span>
+        </a>
+        <p class="nav-label nav-label-spaced">运行中心</p>
+        <a href="#/jobs" class="nav-item" data-route="jobs">
+          <span class="nav-icon" data-icon="list"></span>
+          <span>任务队列</span>
+          <span class="nav-live" id="nav-live" hidden><i></i></span>
+        </a>
+        <a href="#/system" class="nav-item" data-route="system">
+          <span class="nav-icon" data-icon="cpu"></span>
+          <span>引擎与设置</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="engine-card" id="engine-card">
+          <div class="engine-card-top">
+            <span class="status-dot is-loading" id="engine-dot"></span>
+            <span id="engine-label">正在连接引擎</span>
+          </div>
+          <div class="engine-card-version" id="engine-version">FFmpeg · —</div>
+          <div class="engine-card-track"><span id="engine-track"></span></div>
+        </div>
+        <div class="sidebar-note">
+          <span data-icon="shield"></span>
+          <span>仅在本机处理<br>文件不会离开设备</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="打开菜单">
+            <span data-icon="menu"></span>
+          </button>
+          <div class="crumb">
+            <span class="crumb-root">FFmpeg Studio</span>
+            <span class="crumb-sep">/</span>
+            <strong id="crumb-title">工作台</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="system-pill" type="button" id="system-pill" title="查看引擎状态">
+            <span class="status-dot" id="top-engine-dot"></span>
+            <span id="top-engine-text">连接中</span>
+            <span class="system-pill-sep"></span>
+            <span class="mono" id="top-ffmpeg-version">—</span>
+          </button>
+          <button class="btn btn-primary btn-upload" type="button" data-action="pick-files">
+            <span data-icon="upload"></span>
+            <span>导入素材</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="view" id="view" tabindex="-1">
+        <div class="boot-splash">
+          <div class="boot-logo"><span data-icon="film"></span></div>
+          <p>正在唤醒 FFmpeg 引擎…</p>
+          <div class="boot-bar"><span></span></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="drop-overlay" id="drop-overlay" hidden>
+    <div class="drop-card">
+      <span class="drop-icon" data-icon="upload"></span>
+      <h2>把素材放到这里</h2>
+      <p>视频 · 音频 · 图片 · 可一次拖入多个文件</p>
+    </div>
+  </div>
+
+  <input id="file-input" class="visually-hidden" type="file" multiple accept="video/*,audio/*,image/*,.mkv,.flac,.opus,.ts,.m2ts,.wmv">
+  <div class="upload-float" id="upload-float" aria-live="polite"></div>
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+  <div class="modal-root" id="modal-root" hidden></div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

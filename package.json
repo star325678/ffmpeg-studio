@@ -1,0 +1,15 @@
+{
+  "name": "ffmpeg-studio",
+  "version": "1.0.1",
+  "private": true,
+  "description": "A local-first visual FFmpeg workstation for Windows, powered by native FFmpeg 9.1.",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js --open",
+    "serve": "node app/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

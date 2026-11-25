@@ -1,0 +1,25 @@
+# Runtime data
+data/*
+!data/README.txt
+
+# Downloaded or built binaries
+ffmpeg/bin/*
+!ffmpeg/bin/.gitkeep
+runtime/node.exe
+*.exe
+
+# Build and packaging output
+dist/
+_release/
+*.zip
+*.7z
+*.tar.xz
+*.log
+
+# Local tooling
+node_modules/
+.env
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

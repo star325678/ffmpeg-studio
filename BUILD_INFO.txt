@@ -1,0 +1,47 @@
+FFmpeg Studio v1.0.1 — build and verification information
+==========================================================
+
+Build date: 2026-11-25
+Platform: Windows x64
+Application version: 1.0.1
+
+Runtime:
+  Node.js v24.19.0 win-x64
+  runtime/node.exe
+  SHA-256: 3602F2BB1A10F2CBAB4C36886218A33C1AB3DB87290E73B033C46C77147D0237
+
+Media engine:
+  FFmpeg 9.1-essentials_build-www.gyan.dev
+  ffmpeg/bin/ffmpeg.exe
+  SHA-256: ED8F66CB877087A96F5BBB40A2944F0E764F2AD8870D5CB647360D912E62BC07
+  ffmpeg/bin/ffprobe.exe
+  SHA-256: DF0199F606FAA88E9AD192732A7C3987ACFB647663534C297772E17730611A08
+
+Official FFmpeg archives (SHA-256):
+  B9BBBB3ACECE000CBEEC994F856649354E52C773807841E78908374B24D658FD
+  ffmpeg-9.1-essentials_build.zip
+  835B9A733445BA7A56A37A26CF7BDE84E2F3CE7DA2A8EC984276BB2ABB1B922C
+  ffmpeg-9.1-essentials_build.7z
+
+Corresponding source:
+  https://ffmpeg.org/releases/ffmpeg-9.1.tar.xz
+  Release source snapshot (git tag n9.1):
+    ffmpeg-9.1-source.tar.gz
+    SHA-256: 0AC7C9B9806B58EDA00A528DCBA316A2F33D291D949438900EFA811D04B051BD
+
+Verification performed on 2026-11-25:
+  - /api/health reports FFmpeg 9.1
+  - /api/selftest: H.264 + AAC encode and ffprobe parse
+  - MP4, M4A and WEBP conversion with ffprobe validation
+  - 22 API integration checks (baseline suite, FFmpeg 9.0.2)
+  - Browser E2E: upload, convert, edit, inspect, jobs, system, mobile
+  - Path traversal and unsupported upload rejection tests
+  - Release ZIP extracted into a clean directory and started with bundled runtime
+  - Portable EXE first run: payload extraction + server health + self-test
+  - Portable EXE second launch: single-instance reuse (about 0.3 s)
+  - Portable conversion: MP4 upload -> WebM output completed
+
+License:
+  Application code: MIT (see LICENSE)
+  FFmpeg: GPLv3 (see ffmpeg/LICENSE)
+  Node.js: MIT (see runtime/LICENSE)

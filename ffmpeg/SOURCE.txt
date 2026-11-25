@@ -1,0 +1,58 @@
+FFmpeg 9.1 - bundled Windows build information
+================================================
+
+FFmpeg version:
+  ffmpeg version 9.1-essentials_build-www.gyan.dev
+  built with gcc 16.2.0 (Rev6, Built by MSYS2 project)
+  libavutil 61.19.100
+
+Official release:
+  FFmpeg 9.1
+  released 2026-11-20
+  https://ffmpeg.org/download.html
+
+Corresponding source code:
+  https://ffmpeg.org/releases/ffmpeg-9.1.tar.xz
+  signature: https://ffmpeg.org/releases/ffmpeg-9.1.tar.xz.asc
+  Git tag: n9.1
+  Git commit (gyan.dev build): 74e4393595
+
+Source snapshot shipped with the release:
+  ffmpeg-9.1-source.tar.gz (generated from git tag n9.1)
+  SHA-256:
+    0AC7C9B9806B58EDA00A528DCBA316A2F33D291D949438900EFA811D04B051BD
+
+Windows binary build:
+  https://github.com/GyanD/codexffmpeg/releases/tag/9.1
+  assets:
+    ffmpeg-9.1-essentials_build.zip
+    ffmpeg-9.1-essentials_build.7z
+  build scripts:
+    https://github.com/GyanD/codexffmpeg
+  build page:
+    https://www.gyan.dev/ffmpeg/builds/
+
+Official archive SHA-256:
+  ffmpeg-9.1-essentials_build.zip:
+    B9BBBB3ACECE000CBEEC994F856649354E52C773807841E78908374B24D658FD
+  ffmpeg-9.1-essentials_build.7z:
+    835B9A733445BA7A56A37A26CF7BDE84E2F3CE7DA2A8EC984276BB2ABB1B922C
+
+Bundled executable SHA-256:
+  ffmpeg.exe:
+    ED8F66CB877087A96F5BBB40A2944F0E764F2AD8870D5CB647360D912E62BC07
+  ffprobe.exe:
+    DF0199F606FAA88E9AD192732A7C3987ACFB647663534C297772E17730611A08
+
+License:
+  GNU General Public License version 3
+  The build configuration includes --enable-gpl --enable-version3.
+  Full license text: ./LICENSE
+  Build configuration: ./README.txt
+
+FFmpeg source is available from the official URL above. FFmpeg Studio does not
+modify FFmpeg; it invokes the unmodified official build through its CLI.
+
+The bundled build is distributed for convenience with FFmpeg Studio. If you
+redistribute this package, keep the license files, this source notice, and
+comply with GPLv3 (including making corresponding source available).

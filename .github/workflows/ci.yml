@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Node.js and FFmpeg
+        uses: actions/cache@v4
+        with:
+          path: |
+            runtime/node.exe
+            ffmpeg/bin/ffmpeg.exe
+            ffmpeg/bin/ffprobe.exe
+          key: deps-node-24.19.0-ffmpeg-9.1
+
+      - name: Download dependencies
+        shell: pwsh
+        run: ./scripts/setup-deps.ps1
+
+      - name: Syntax check
+        shell: pwsh
+        run: |
+          node --check app/server.js
+          node --check app/public/app.js
+
+      - name: Smoke test
+        shell: pwsh
+        run: ./scripts/smoke-test.ps1

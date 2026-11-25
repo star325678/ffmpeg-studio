@@ -1,0 +1,5 @@
+FFmpeg Studio v1.0.1
+Windows x64 portable build
+Built 2026-11-25
+FFmpeg 9.1-essentials_build (2026-11-20)
+Node.js 24.19.0
